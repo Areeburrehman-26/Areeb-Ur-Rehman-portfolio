@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Areeb ur Rehman — portfolio
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 (App Router) · TypeScript · Tailwind v4 · Framer Motion · GSAP ScrollTrigger.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Piece | File |
+| --- | --- |
+| **All copy and project data** | `src/lib/content.ts` |
+| Boot loader (terminal sequence) | `src/components/BootLoader.tsx` |
+| IDE chrome: progress bar, ruler, clock, % badge | `src/components/TopChrome.tsx` |
+| Bracketed nav `[·work·]` with scroll spy | `src/components/BracketNav.tsx` |
+| Cursor-follow tag + `CursorZone` label regions | `src/components/CursorTag.tsx` |
+| Scramble/decode text | `src/components/ScrambleText.tsx` |
+| Blur-to-sharp reveal | `src/components/Reveal.tsx` |
+| Drifting orb parallax field | `src/components/AmbientField.tsx` |
+| Pinned, scroll-scrubbed capability showcase | `src/components/CapabilityShowcase.tsx` |
+| The 3D "system" object (CSS 3D rack) | `src/components/SystemObject.tsx` |
+| Tilted 3D case-study carousel | `src/components/CaseStudies.tsx` |
+| Stacked/rotated process cards | `src/components/ProcessStack.tsx` |
+| Contact form + call CTA | `src/components/Contact.tsx` |
+| Contact endpoint | `src/app/api/contact/route.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Motion values (durations, easings, offsets, rotation angles) follow the build
+spec and are kept next to the code that uses them.
 
-## Learn More
+## YOU NEED TO FILL THESE IN
 
-To learn more about Next.js, take a look at the following resources:
+1. **Links** — `src/lib/content.ts` → `site`:
+   - `callUrl` is a placeholder (`https://cal.com/your-handle/intro`).
+   - `socials` all point at `your-handle`.
+   - `email` is set to `areebrehman615@gmail.com` — change if you want a
+     different address public.
+2. **Contact delivery** — `src/app/api/contact/route.ts` validates and logs the
+   submission server-side, then returns success. Wire it to Resend / Postmark /
+   a Slack webhook / a database. Nothing is emailed today.
+3. **Project screenshots** — every case study currently renders a generated
+   abstract mock with a `[· img: /projects/<id>.png ·]` tag on it. To use a real
+   image: drop the file in `public/projects/` and set `image: "/projects/<id>.png"`
+   on that project in `src/lib/content.ts`. IDs: `finance`, `journaling`,
+   `tenant-rag`, `marketplace`, `voice-agent`, `cooking`, `automation`.
+   No external image library is used, so nothing breaks if you never add them.
+4. **Project copy** — problem/build/outcome text is written from the brief and
+   is deliberately client-anonymous. Check the outcome claims are ones you're
+   happy to stand behind.
+5. **Testimonials** — none existed, so section 6 is the "how I work" process
+   stack using the same fanned-card mechanic, per the spec's fallback.
+6. **OG image** — `src/app/layout.tsx` sets OpenGraph text only. Add
+   `src/app/opengraph-image.png` if you want a share card.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes on the build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **The 3D object is CSS 3D, not WebGL.** Six-face boxes in a `preserve-3d`
+  scene, driven by the same GSAP scrub timeline as everything else. That keeps
+  the hero asset-free and instant to paint: no model to lazy-load, no
+  three.js/R3F in the bundle. To swap in a real 3D renderer later, replace
+  `SystemObject.tsx` — the timeline targets `[data-rack]`, `[data-slab]` and
+  `[data-light]`, so the contract is small.
+- **Mobile and reduced motion** never pin or scrub. Both fall back to the
+  swipeable stepped sequence with the same content, and the carousel flattens
+  to opacity-only transitions.
+- **Boot loader** runs once per session (`sessionStorage`), is skippable by
+  click/Esc/Enter/Space, and is skipped entirely under reduced motion.
+- The scramble effect renders one span per character grouped into inline-block
+  words — read the comment in `ScrambleText.tsx` before changing it, the
+  grouping is what lets long headlines wrap.

@@ -1,26 +1,328 @@
 @import "tailwindcss";
 
+@theme {
+  --color-void: #050506;
+  --color-navy: #070b16;
+  --color-plum: #120a24;
+  --color-ink: #e9edf6;
+  --color-muted: #8b95ad;
+  --color-line: #1d2334;
+  --color-accent: #ff6a1a;
+  --color-accent-2: #2dd4bf;
+  --color-accent-3: #a78bfa;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-mech: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  /* Height of the fixed IDE chrome bar. Sections offset scroll-margin by this. */
+  --chrome-h: 44px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The custom cursor tag replaces nothing — the native cursor stays visible. */
+::selection {
+  background: var(--color-accent);
+  color: #0b0b0c;
+}
+
+/* ── Section anchors sit below the fixed chrome bar ─────────────────── */
+section[id] {
+  scroll-margin-top: calc(var(--chrome-h) + 16px);
+}
+
+/* ── Terminal scanline / static texture (boot loader bars) ──────────── */
+@keyframes scan-jitter {
+  0% {
+    background-position-x: 0px;
+    opacity: 0.55;
+  }
+  25% {
+    background-position-x: 11px;
+    opacity: 0.85;
+  }
+  50% {
+    background-position-x: 4px;
+    opacity: 0.4;
+  }
+  75% {
+    background-position-x: 17px;
+    opacity: 0.9;
+  }
+  100% {
+    background-position-x: 8px;
+    opacity: 0.6;
+  }
+}
+
+.scanbar {
+  background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 106, 26, 0.45) 0px,
+      rgba(255, 106, 26, 0.45) 1px,
+      transparent 1px,
+      transparent 7px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(233, 237, 246, 0.1) 0px,
+      rgba(233, 237, 246, 0.1) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  background-size: 28px 100%, 100% 5px;
+  mask-image: linear-gradient(var(--scan-dir, to top), #000, transparent);
+  /* steps() keeps the flicker jittery instead of smoothly interpolated */
+  animation: scan-jitter 0.5s steps(4, end) infinite;
+}
+
+/* ── Corner-bracket pulse (pinned scrub section) ────────────────────── */
+@keyframes bracket-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.bracket-pulse {
+  animation: bracket-pulse 2s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+/* ── Ambient drifting orbs (parallax background field) ──────────────── */
+@keyframes orb-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4vw, -3vh, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-3vw, 4vh, 0) scale(0.95);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+  animation: orb-drift var(--dur, 26s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ── Auto-rotation for the system object on the non-scrubbed fallback ─ */
+@keyframes rack-spin {
+  0%,
+  100% {
+    transform: rotateX(-14deg) rotateY(-34deg);
+  }
+  50% {
+    transform: rotateX(-18deg) rotateY(36deg);
+  }
+}
+
+/* ── Card visuals ───────────────────────────────────────────────────── */
+/* Every animated illustration lives inside a .viz wrapper so reduced motion
+   can silence the whole set in one rule (see the bottom of this file). */
+
+@keyframes viz-bar {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes viz-type {
+  0% {
+    transform: scaleX(0);
+  }
+  55%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes viz-scan {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(560%);
+    opacity: 0;
+  }
+}
+
+@keyframes viz-ring {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes viz-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes viz-blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes viz-wave {
+  0%,
+  100% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes viz-packet {
+  from {
+    stroke-dashoffset: 240;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes viz-draw {
+  from {
+    stroke-dashoffset: var(--len, 120);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes viz-link {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  40%,
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes cue-down {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-50%, 14px);
+    opacity: 1;
+  }
+}
+
+@keyframes cue-right {
+  0% {
+    left: 4px;
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 10px);
+    opacity: 0.35;
+  }
+}
+
+@keyframes viz-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ── Grid paper texture used behind several bands ───────────────────── */
+.grid-paper {
+  background-image: linear-gradient(
+      to right,
+      rgba(233, 237, 246, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(233, 237, 246, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ── Blur-to-sharp reveal, CSS fallback for no-JS / SSR paint ───────── */
+.reveal-init {
+  opacity: 0.3;
+  filter: blur(8px) saturate(0.6);
+  transform: translateY(24px);
+}
+
+/* ── 3D scene helpers ───────────────────────────────────────────────── */
+.scene {
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* ── Reduced motion: kill ambient loops, keep layout intact ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .orb,
+  .scanbar,
+  .bracket-pulse,
+  .viz *,
+  .viz {
+    animation: none !important;
+  }
 }
