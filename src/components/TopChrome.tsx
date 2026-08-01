@@ -1,40 +1,25 @@
 "use client";
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BracketNav from "./BracketNav";
+import MobileNav from "./MobileNav";
 import { site } from "@/lib/content";
 
 const TICKS = Array.from({ length: 21 }, (_, i) => i); // 0…2000 in 100s
 
 /**
- * Fixed IDE/terminal chrome: 1:1 scroll progress bar, logo chip, bracketed nav,
- * a measuring ruler that fills with page progress, a live clock, and a scroll
- * percentage badge.
+ * Fixed IDE/terminal chrome: 1:1 scroll progress bar, logo chip, bracketed nav
+ * (a hamburger below `lg`), a measuring ruler that fills with page progress,
+ * and a scroll percentage badge.
  */
 export default function TopChrome() {
   const { scrollYProgress } = useScroll();
   const [pct, setPct] = useState(0);
-  const [clock, setClock] = useState<string | null>(null);
 
   useMotionValueEvent(scrollYProgress, "change", (v) =>
     setPct(Math.round(v * 100)),
   );
-
-  useEffect(() => {
-    const tick = () =>
-      setClock(
-        new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }),
-      );
-    tick();
-    const id = window.setInterval(tick, 1000);
-    return () => window.clearInterval(id);
-  }, []);
 
   return (
     <>
@@ -46,7 +31,7 @@ export default function TopChrome() {
         />
       </div>
 
-      <header className="fixed inset-x-0 top-[3px] z-[100] h-[41px] border-b border-line/80 bg-void/85 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-[3px] z-[100] h-[41px] border-b border-line/80 bg-void lg:bg-void/85 lg:backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-[1600px] items-center gap-3 px-3 sm:px-5">
           {/* logo chip */}
           <a
@@ -59,9 +44,7 @@ export default function TopChrome() {
             <span className="hidden sm:inline">portfolio.tsx</span>
           </a>
 
-          {/* Narrow screens scroll the nav rather than pushing the progress
-              badge off the edge. */}
-          <BracketNav className="min-w-0 flex-1 overflow-x-auto lg:flex-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" />
+          <BracketNav className="hidden lg:flex" />
 
           {/* ruler */}
           <div className="relative hidden h-full flex-1 items-end overflow-hidden lg:flex">
@@ -88,14 +71,11 @@ export default function TopChrome() {
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em]">
-            <span className="hidden items-center gap-1.5 text-muted sm:flex">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-2" />
-              live · <span className="tabular-nums text-ink">{clock ?? "--:--:--"}</span>
-            </span>
             <span className="rounded-sm border border-line bg-navy/80 px-1.5 py-1 tabular-nums text-accent">
               {String(pct).padStart(2, "0")}%
             </span>
             <span className="hidden text-muted/60 xl:inline">{site.role}</span>
+            <MobileNav />
           </div>
         </div>
       </header>

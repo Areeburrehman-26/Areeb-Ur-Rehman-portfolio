@@ -55,6 +55,13 @@ export default function BootLoader() {
     setDone(true);
   }, []);
 
+  // A reload should start at the hero, not wherever the browser last left off
+  // (restored mid-page while the loader is up looks like a broken jump).
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     // The sequence runs on every load. It is short and skippable, and a
     // once-per-session skip meant a reload jumped straight past the counter.

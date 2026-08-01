@@ -1,23 +1,46 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useIsNarrow } from "@/lib/hooks";
 
 const ORBS = [
-  { top: "6%", left: "-8%", size: 520, color: "rgba(255,106,26,0.16)", dur: 28, delay: 0, depth: 90 },
-  { top: "38%", left: "62%", size: 620, color: "rgba(45,212,191,0.12)", dur: 34, delay: -6, depth: 160 },
-  { top: "72%", left: "8%", size: 480, color: "rgba(167,139,250,0.14)", dur: 30, delay: -12, depth: 220 },
-  { top: "115%", left: "55%", size: 560, color: "rgba(255,106,26,0.10)", dur: 26, delay: -3, depth: 120 },
+  { top: "6%", left: "-8%", size: 520, color: "rgba(255,106,26,0.16)", dur: 28, delay: 0 },
+  { top: "38%", left: "62%", size: 620, color: "rgba(45,212,191,0.12)", dur: 34, delay: -6 },
+  { top: "72%", left: "8%", size: 480, color: "rgba(167,139,250,0.14)", dur: 30, delay: -12 },
+  { top: "115%", left: "55%", size: 560, color: "rgba(255,106,26,0.10)", dur: 26, delay: -3 },
 ];
 
 /**
  * Fixed, drifting orb field. Content scrolls past it; the orbs themselves move
  * only slightly with scroll, so the depth reads as parallax rather than a
  * scroll-locked background.
+ *
+ * Phones get a static painted version instead. Four 500px+ elements under a
+ * 70px blur, animated and scroll-linked, is the single most expensive thing on
+ * the page and mobile GPUs stutter on it.
  */
 export default function AmbientField() {
+  const narrow = useIsNarrow();
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -140]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -260]);
+
+  if (narrow) {
+    return (
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+        style={{
+          background:
+            "radial-gradient(60% 40% at 10% 8%, rgba(255,106,26,0.10), transparent 70%)," +
+            "radial-gradient(55% 35% at 90% 48%, rgba(45,212,191,0.08), transparent 70%)," +
+            "radial-gradient(60% 40% at 20% 88%, rgba(167,139,250,0.09), transparent 70%)",
+        }}
+      >
+        <div className="absolute inset-0 grid-paper opacity-40" />
+      </div>
+    );
+  }
 
   return (
     <div

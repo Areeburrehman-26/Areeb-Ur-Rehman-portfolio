@@ -237,7 +237,7 @@ function ScrubShowcase() {
 
         <div className="relative z-10 mx-auto grid h-full w-full max-w-[1400px] grid-cols-1 items-center gap-6 px-6 pt-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:px-16">
           <ChapterCopy index={active} />
-          <div className="relative h-[46vh] w-full lg:h-[70vh]">
+          <div className="relative h-[46vh] w-full overflow-hidden lg:h-[70vh]">
             <Callouts index={active} />
             <SystemObject active={active} />
           </div>
@@ -273,7 +273,7 @@ function SteppedShowcase({ autoRotate }: { autoRotate: boolean }) {
 
       <div className="relative mx-auto max-w-[1400px] px-6">
         <div
-          className={`relative mx-auto h-[42vh] max-h-[380px] w-full ${
+          className={`relative mx-auto h-[42vh] max-h-[380px] w-full overflow-hidden ${
             autoRotate
               ? "[&_[data-rack]]:animate-[rack-spin_22s_ease-in-out_infinite]"
               : ""

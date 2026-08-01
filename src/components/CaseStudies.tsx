@@ -20,7 +20,7 @@ const SCROLL_PER_CARD = 75;
  * Generated stand-in artwork. Replace by setting `image` on the project in
  * src/lib/content.ts once real screenshots exist in /public/projects/.
  */
-function MockArt({ p }: { p: Project }) {
+function MockArt({ p, live }: { p: Project; live: boolean }) {
   const c = (l: number, a = 1) => `hsla(${p.hue}, 70%, ${l}%, ${a})`;
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -51,7 +51,7 @@ function MockArt({ p }: { p: Project }) {
       </div>
 
       {/* animated illustration of what this project actually does */}
-      <ProjectVisual id={p.id} hue={p.hue} />
+      {live && <ProjectVisual id={p.id} hue={p.hue} />}
 
       <span className="absolute bottom-2 left-5 font-mono text-[8px] uppercase tracking-[0.2em] text-ink/25">
         [· img: /projects/{p.id}.png ·]
@@ -115,7 +115,7 @@ function Card({
       {p.image ? (
         <Image src={p.image} alt={p.name} fill className="object-cover" sizes="560px" />
       ) : (
-        <MockArt p={p} />
+        <MockArt p={p} live={abs < 1.2} />
       )}
       {!near && <span className="absolute inset-0 bg-void/45" />}
     </button>
@@ -134,7 +134,9 @@ function Deck({
   onPick: (i: number) => void;
 }) {
   return (
-    <div className={`preserve-3d absolute inset-0 ${flat ? "" : "scene"}`}>
+    <div
+      className={`preserve-3d absolute inset-0 overflow-hidden ${flat ? "" : "scene"}`}
+    >
       {projects.map((proj, i) => (
         <Card
           key={proj.id}
@@ -394,7 +396,7 @@ function ScrubCarousel() {
             />
 
             <div className="flex min-h-0 flex-col">
-              <div className="relative min-h-0 flex-1">
+              <div className="relative min-h-0 flex-1 overflow-hidden">
                 <Deck pos={pos} flat={false} scrubbed onPick={jumpTo} />
               </div>
               <ProjectPanel p={projects[active]} compact />
@@ -442,7 +444,7 @@ function SteppedCarousel({ flat }: { flat: boolean }) {
 
         <div className="order-1 lg:order-2">
           <div
-            className="relative h-[42vh] min-h-[300px] w-full"
+            className="relative h-[42vh] min-h-[300px] w-full overflow-hidden"
             onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
             onTouchEnd={(e) => {
               if (touchX.current === null) return;

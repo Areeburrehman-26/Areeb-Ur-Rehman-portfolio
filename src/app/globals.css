@@ -312,6 +312,19 @@ section[id] {
   transform-style: preserve-3d;
 }
 
+/* ── Phones: drop the expensive paint work ──────────────────────────── */
+@media (max-width: 1023px) {
+  /* Large blurred surfaces are the main source of scroll jank on mobile. */
+  .orb {
+    display: none;
+  }
+
+  /* Card artwork keeps its shape but stops repainting every frame. */
+  .viz * {
+    animation-duration: 6s;
+  }
+}
+
 /* ── Reduced motion: kill ambient loops, keep layout intact ─────────── */
 @media (prefers-reduced-motion: reduce) {
   html {
