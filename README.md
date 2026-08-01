@@ -32,26 +32,23 @@ spec and are kept next to the code that uses them.
 
 ## YOU NEED TO FILL THESE IN
 
-1. **Links** — `src/lib/content.ts` → `site`:
-   - `callUrl` is a placeholder (`https://cal.com/your-handle/intro`).
-   - `socials` all point at `your-handle`.
-   - `email` is set to `areebrehman615@gmail.com` — change if you want a
-     different address public.
-2. **Contact delivery** — `src/app/api/contact/route.ts` validates and logs the
-   submission server-side, then returns success. Wire it to Resend / Postmark /
-   a Slack webhook / a database. Nothing is emailed today.
-3. **Project screenshots** — every case study currently renders a generated
+1. **Contact email sending is live** via Resend. Config is in `.env.local`
+   (gitignored; see `.env.example`). `CONTACT_FROM` is currently
+   `onboarding@resend.dev`, which only delivers to the address that owns the
+   Resend account. Verify your own domain in Resend and change `CONTACT_FROM`
+   to send from your own address to anyone.
+2. **Project screenshots** — every case study currently renders a generated
    abstract mock with a `[· img: /projects/<id>.png ·]` tag on it. To use a real
    image: drop the file in `public/projects/` and set `image: "/projects/<id>.png"`
    on that project in `src/lib/content.ts`. IDs: `finance`, `journaling`,
    `tenant-rag`, `marketplace`, `voice-agent`, `cooking`, `automation`.
    No external image library is used, so nothing breaks if you never add them.
-4. **Project copy** — problem/build/outcome text is written from the brief and
+3. **Project copy** — problem/build/outcome text is written from the brief and
    is deliberately client-anonymous. Check the outcome claims are ones you're
    happy to stand behind.
-5. **Testimonials** — none existed, so section 6 is the "how I work" process
+4. **Testimonials** — none existed, so section 6 is the "how I work" process
    stack using the same fanned-card mechanic, per the spec's fallback.
-6. **OG image** — `src/app/layout.tsx` sets OpenGraph text only. Add
+5. **OG image** — `src/app/layout.tsx` sets OpenGraph text only. Add
    `src/app/opengraph-image.png` if you want a share card.
 
 ## Notes on the build
