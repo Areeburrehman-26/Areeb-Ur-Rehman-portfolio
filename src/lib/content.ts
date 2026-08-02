@@ -12,6 +12,8 @@ export const site = {
   role: "Full-Stack Web Developer · AI Engineer · Backend Systems",
   email: "areebrehman615@gmail.com",
   callUrl: "https://calendar.app.google/KWERZYALu16rKDZQA",
+  /** Lives in /public. Renamed from the original so the URL needs no escaping. */
+  resumeUrl: "/areeb-ur-rehman-resume.pdf",
   upworkUrl:
     "https://www.upwork.com/freelancers/~015f46f60dc0dca7e8?mp_source=share",
   socials: [
@@ -43,6 +45,11 @@ export const hero = {
     { label: "see the work", href: "#work", primary: true },
     { label: "book a call", href: "#contact", primary: false },
   ],
+  /** Split so the second half can carry the emphasis. */
+  manifesto: {
+    lead: "AI is just a snapshot of our past being sold as the future.",
+    turn: "The real future is human creativity.",
+  },
   facts: [
     { k: "stack", v: "python · next.js · react" },
     { k: "ai", v: "rag · agents · langchain" },

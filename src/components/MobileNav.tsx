@@ -89,6 +89,14 @@ export default function MobileNav() {
               </nav>
 
               <div className="mt-auto space-y-3 font-mono text-[11px] uppercase tracking-[0.16em]">
+                <a
+                  href={site.resumeUrl}
+                  download
+                  onClick={() => setOpen(false)}
+                  className="block rounded-sm bg-accent px-4 py-3 text-center text-void"
+                >
+                  [·download·resume·]
+                </a>
                 <a href={`mailto:${site.email}`} className="block text-accent">
                   {site.email}
                 </a>

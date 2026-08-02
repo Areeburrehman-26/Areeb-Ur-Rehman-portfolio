@@ -50,12 +50,21 @@ export default function About() {
                   </div>
                 ))}
               </dl>
-              <a
-                href="#contact"
-                className="mt-6 inline-block rounded-sm border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:bg-accent hover:text-void"
-              >
-                [·work·with·{site.name.split(" ")[0].toLowerCase()}·]
-              </a>
+              <div className="mt-6 flex flex-wrap gap-2">
+                <a
+                  href={site.resumeUrl}
+                  download
+                  className="inline-block rounded-sm bg-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-void transition-transform duration-200 hover:-translate-y-0.5"
+                >
+                  [·download·resume·]
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-block rounded-sm border border-accent/50 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:bg-accent hover:text-void"
+                >
+                  [·work·with·{site.name.split(" ")[0].toLowerCase()}·]
+                </a>
+              </div>
             </div>
           </RevealItem>
         </Reveal>

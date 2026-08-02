@@ -24,13 +24,13 @@ export default function Hero() {
           </RevealItem>
 
           <RevealItem>
-            <p className="mx-auto mt-6 max-w-[58ch] text-sm leading-relaxed text-muted sm:mt-8 sm:text-lg">
+            <p className="mx-auto mt-5 max-w-[58ch] text-sm leading-relaxed text-muted sm:mt-8 sm:text-lg">
               {hero.sub}
             </p>
           </RevealItem>
 
           <RevealItem>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
               {hero.ctas.map((c) => (
                 <a
                   key={c.href}
@@ -47,8 +47,19 @@ export default function Hero() {
             </div>
           </RevealItem>
 
+          {/* The human counterpoint to the machine chrome. Serif italic, the
+              same accent the other hand-written notes use. */}
           <RevealItem className="w-full">
-            <dl className="mx-auto mt-12 hidden max-w-3xl grid-cols-2 sm:mt-16 sm:grid gap-x-8 gap-y-5 border-t border-line pt-8 font-mono text-[11px] sm:grid-cols-4">
+            <figure className="mx-auto mt-7 max-w-[44ch] sm:mt-12">
+              <blockquote className="font-serif text-base italic leading-relaxed text-muted sm:text-lg">
+                {hero.manifesto.lead}{" "}
+                <span className="text-accent-2">{hero.manifesto.turn}</span>
+              </blockquote>
+            </figure>
+          </RevealItem>
+
+          <RevealItem className="w-full">
+            <dl className="mx-auto mt-10 hidden max-w-3xl grid-cols-2 sm:mt-14 sm:grid gap-x-8 gap-y-5 border-t border-line pt-8 font-mono text-[11px] sm:grid-cols-4">
               {hero.facts.map((f) => (
                 <div key={f.k}>
                   <dt className="uppercase tracking-[0.2em] text-muted/60">{f.k}</dt>

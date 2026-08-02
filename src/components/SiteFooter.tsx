@@ -32,12 +32,21 @@ export default function SiteFooter() {
               Building the system, then the intelligence on top of it.
               Available for new work.
             </p>
-            <a
-              href={`mailto:${site.email}`}
-              className="mt-5 inline-block font-mono text-sm text-accent underline-offset-4 hover:underline"
-            >
-              {site.email}
-            </a>
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <a
+                href={`mailto:${site.email}`}
+                className="font-mono text-sm text-accent underline-offset-4 hover:underline"
+              >
+                {site.email}
+              </a>
+              <a
+                href={site.resumeUrl}
+                download
+                className="rounded-sm border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink transition-colors hover:border-accent/60 hover:text-accent"
+              >
+                [·resume·↓·]
+              </a>
+            </div>
           </div>
 
           <ul className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] sm:flex-col sm:items-end">
