@@ -42,9 +42,17 @@ export const hero = {
   headline:
     "AI is just a snapshot of our past being sold as the future. The real future is human creativity.",
   sub: "Finance and ERP platforms, assistants grounded in your own documents, voice agents that answer the phone, and the automation behind them.",
+  // Every entry carries the same keys so `as const` keeps the union usable.
   ctas: [
-    { label: "see the work", href: "#work", primary: true },
-    { label: "book a call", href: "#contact", primary: false },
+    { label: "see the work", href: "#work", primary: true, download: false, pulse: false },
+    {
+      label: "resume",
+      href: "/areeb-ur-rehman-resume.pdf",
+      primary: false,
+      download: true,
+      pulse: true,
+    },
+    { label: "book a call", href: "#contact", primary: false, download: false, pulse: false },
   ],
   facts: [
     { k: "stack", v: "python · next.js · react" },

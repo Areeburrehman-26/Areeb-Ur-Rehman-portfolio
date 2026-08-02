@@ -47,8 +47,12 @@ export default function ParticleHeadline({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    if (plain) return;
     const host = hostRef.current;
+    if (plain) {
+      // Drop any height a previous canvas run measured.
+      if (host) host.style.height = "";
+      return;
+    }
     const canvas = canvasRef.current;
     if (!host || !canvas) return;
 
@@ -189,7 +193,9 @@ export default function ParticleHeadline({
       resizeTimer = window.setTimeout(build, 150);
     };
 
+    let cancelled = false;
     const start = () => {
+      if (cancelled) return;
       build();
       raf = requestAnimationFrame(frame);
     };
@@ -203,6 +209,7 @@ export default function ParticleHeadline({
     window.addEventListener("resize", onResize);
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(raf);
       window.clearTimeout(resizeTimer);
       // Drop the measured height so the plain-text fallback can size itself
@@ -219,7 +226,7 @@ export default function ParticleHeadline({
       {/* Real text: the accessible copy, and the visible headline whenever the
           canvas is not running. */}
       <h1
-        className={`text-center text-[clamp(2.2rem,7vw,5.4rem)] font-bold uppercase leading-[1.02] tracking-[-0.02em] text-ink ${
+        className={`text-center text-[clamp(1.9rem,6.6vw,5.4rem)] font-bold uppercase leading-[1.02] tracking-[-0.02em] text-ink ${
           plain ? "" : "sr-only"
         }`}
       >

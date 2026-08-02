@@ -31,19 +31,29 @@ export default function Hero() {
 
           <RevealItem>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
-              {hero.ctas.map((c) => (
-                <a
-                  key={c.href}
-                  href={c.href}
-                  className={
-                    c.primary
-                      ? "inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-mono text-[12px] uppercase tracking-[0.16em] text-void transition-transform duration-200 hover:-translate-y-0.5"
-                      : "inline-flex items-center gap-2 rounded-sm border border-line px-5 py-3 font-mono text-[12px] uppercase tracking-[0.16em] text-ink transition-colors duration-200 hover:border-accent/60 hover:text-accent"
-                  }
-                >
-                  [·{c.label.replace(/ /g, "·")}·]
-                </a>
-              ))}
+              {hero.ctas.map((c) => {
+                const base =
+                  "inline-flex items-center gap-2 rounded-sm px-5 py-3 font-mono text-[12px] uppercase tracking-[0.16em]";
+                // The pulsing one owns its transform, so it gets a colour
+                // hover instead of the lift the others use.
+                const style = c.pulse
+                  ? `${base} heartbeat border border-accent-2/60 text-accent-2 transition-colors duration-200 hover:bg-accent-2 hover:text-void`
+                  : c.primary
+                    ? `${base} bg-accent text-void transition-transform duration-200 hover:-translate-y-0.5`
+                    : `${base} border border-line text-ink transition-colors duration-200 hover:border-accent/60 hover:text-accent`;
+
+                return (
+                  <a
+                    key={c.href}
+                    href={c.href}
+                    download={c.download || undefined}
+                    className={style}
+                  >
+                    [·{c.label.replace(/ /g, "·")}·]
+                    {c.download ? " ↓" : null}
+                  </a>
+                );
+              })}
             </div>
           </RevealItem>
 
