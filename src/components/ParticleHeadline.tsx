@@ -32,16 +32,16 @@ const DAMPING = 0.86;
  */
 const WORD_COLORS: Record<string, [string, string]> = {
   AI: ["#c4b5fd", "#7c5cf0"],
-  PAST: ["#8b95ad", "#4a5266"],
+  PAST: ["#b3bccd", "#7c8698"],
   SOLD: ["#3ee0cb", "#0f9e8e"],
-  "FUTURE#1": ["#707a90", "#434b5d"],
+  "FUTURE#1": ["#a5aebf", "#767f91"],
   "FUTURE#2": ["#ff8a3d", "#ff6a1a"],
   HUMAN: ["#ff6a1a", "#ff9a4d"],
   CREATIVITY: ["#ff9a4d", "#ffd39b"],
 };
 
 /** Everything not called out above. */
-const DEFAULT_COLOR: [string, string] = ["#e9edf6", "#9aa4b8"];
+const DEFAULT_COLOR: [string, string] = ["#f4f7fc", "#c3cbda"];
 
 const normalize = (word: string) => word.replace(/[^A-Za-z]/g, "").toUpperCase();
 
@@ -213,7 +213,7 @@ export default function ParticleHeadline({
           const base = mix(ca, cb, t);
           // A quarter of the dots sit a shade back, so the fill reads as a
           // matrix of lights rather than flat paint.
-          const color = Math.random() < 0.25 ? mix(base, "#39404f", 0.45) : base;
+          const color = Math.random() < 0.13 ? mix(base, "#4a5262", 0.26) : base;
 
           next.push({
             hx: x,
@@ -222,7 +222,7 @@ export default function ParticleHeadline({
             y,
             vx: 0,
             vy: 0,
-            size: step - 1.4,
+            size: step - 0.7,
             color,
           });
         }
@@ -320,6 +320,10 @@ export default function ParticleHeadline({
 
   return (
     <div ref={hostRef} className={`relative w-full font-sans ${className}`}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-x-10 -inset-y-8 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(5,5,6,0.94)_38%,rgba(5,5,6,0)_78%)]"
+      />
       <h1
         className={`text-center text-[clamp(1.9rem,6.6vw,5.4rem)] font-bold uppercase leading-[1.02] tracking-[-0.02em] ${
           plain ? "" : "sr-only"
