@@ -210,10 +210,10 @@ export default function ParticleHeadline({
           // Quantised so the frame loop has few fillStyle changes.
           const raw = box ? (x - box.x0) / Math.max(1, box.x1 - box.x0) : 0.5;
           const t = Math.round(Math.min(1, Math.max(0, raw)) * 10) / 10;
-          const base = mix(ca, cb, t);
-          // A quarter of the dots sit a shade back, so the fill reads as a
-          // matrix of lights rather than flat paint.
-          const color = Math.random() < 0.13 ? mix(base, "#4a5262", 0.26) : base;
+          // Every dot in a letter takes its word's gradient at this exact
+          // x position, so the whole letter is one consistent colour with no
+          // per-dot noise mixed in.
+          const color = mix(ca, cb, t);
 
           next.push({
             hx: x,
