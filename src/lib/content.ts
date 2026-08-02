@@ -1,6 +1,9 @@
 /**
  * All site copy lives here so it can be edited without touching components.
- * Anything marked PLACEHOLDER is safe to replace with real details.
+ *
+ * NDA note: the work done at Sliding Scale Technologies and Sawda.ai is
+ * described at capability level only. No proprietary detail, and nothing
+ * framed as available to license or resell.
  */
 
 export const site = {
@@ -9,11 +12,17 @@ export const site = {
   role: "Full-Stack Web Developer · AI Engineer · Backend Systems",
   email: "areebrehman615@gmail.com",
   callUrl: "https://calendar.app.google/KWERZYALu16rKDZQA",
+  upworkUrl:
+    "https://www.upwork.com/freelancers/~015f46f60dc0dca7e8?mp_source=share",
   socials: [
     { label: "github", href: "https://github.com/Areeburrehman-26" },
     {
       label: "linkedin",
       href: "https://www.linkedin.com/in/areeb-ur-rehman-81b057292/",
+    },
+    {
+      label: "upwork",
+      href: "https://www.upwork.com/freelancers/~015f46f60dc0dca7e8?mp_source=share",
     },
   ],
 } as const;
@@ -28,11 +37,17 @@ export const nav = [
 
 export const hero = {
   eyebrow: "[· full-stack web developer · ai engineer · backend systems ·]",
-  headline: "I build the system your business is missing.",
-  sub: "ERP and finance tooling, booking platforms, AI chatbots, RAG assistants, voice agents, and the cloud infrastructure behind them.",
+  headline: "I build the system, then the AI that runs it.",
+  sub: "Finance and ERP platforms, assistants grounded in your own documents, voice agents that answer the phone, and the automation behind them.",
   ctas: [
-    { label: "see the systems", href: "#systems", primary: true },
+    { label: "see the work", href: "#work", primary: true },
     { label: "book a call", href: "#contact", primary: false },
+  ],
+  facts: [
+    { k: "stack", v: "python · next.js · react" },
+    { k: "ai", v: "rag · agents · langchain" },
+    { k: "shipped", v: "5 chatbots · 4 rag systems" },
+    { k: "status", v: "employed · open to freelance" },
   ],
 } as const;
 
@@ -52,65 +67,65 @@ export const capabilities: Capability[] = [
     icon: "▤",
     chapter: "01 / erp & finance",
     headline: "FINANCE THAT RECONCILES ITSELF",
-    body: "Ledgers, invoicing, payroll, approvals and reporting in one system your finance manager actually trusts. No more four spreadsheets and a WhatsApp thread.",
+    body: "Invoicing, salaries, extra charges, zakat and the split of profit between shareholders, calculated in one system instead of five spreadsheets. Frontend on Vercel, backend and data on the cloud.",
     callouts: [
-      { text: "double-entry ledger", x: 12, y: 24 },
-      { text: "audit trail on every write", x: 62, y: 70 },
-    ],
-  },
-  {
-    id: "booking",
-    icon: "◷",
-    chapter: "02 / booking & scheduling",
-    headline: "SCHEDULING WITHOUT THE PHONE CALLS",
-    body: "Availability, capacity, deposits, reminders and cancellations handled end to end - so the calendar stops being a person's full-time job.",
-    callouts: [
-      { text: "conflict-free slotting", x: 66, y: 22 },
-      { text: "payments + deposits", x: 10, y: 66 },
+      { text: "zakat + shareholder splits", x: 12, y: 24 },
+      { text: "every figure traceable", x: 62, y: 70 },
     ],
   },
   {
     id: "chatbot",
     icon: "◍",
-    chapter: "03 / ai chatbots & rag",
+    chapter: "02 / ai chatbots & rag",
     headline: "ANSWERS FROM YOUR OWN DOCUMENTS",
-    body: "Retrieval-augmented assistants grounded in your contracts, policies and product data. Cited, scoped, and honest about what it does not know.",
+    body: "Two things through one pipeline. Site chatbots you load your own knowledge base into, answering in realtime and escalating to a human the moment a question falls outside what they know. And retrieval systems that read dense source material, contracts and trade documentation, then answer from the clause instead of from memory.",
     callouts: [
-      { text: "vector retrieval", x: 58, y: 18 },
-      { text: "grounded + cited output", x: 14, y: 72 },
+      { text: "bring your own knowledge base", x: 58, y: 18 },
+      { text: "escalates to a human", x: 14, y: 72 },
     ],
   },
   {
     id: "voice",
     icon: "◉",
-    chapter: "04 / voice agents",
+    chapter: "03 / voice agents",
     headline: "A LINE THAT ALWAYS PICKS UP",
-    body: "Telephony agents that qualify leads, book appointments and escalate to a human at exactly the right moment. Sub-second turn-taking, full transcripts.",
+    body: "Call the number and an agent answers, works out what you want, books it, and sends the responsible staff member a summary by SMS or email. Ten calls at once, no queue, no missed evenings.",
     callouts: [
-      { text: "realtime speech loop", x: 64, y: 62 },
-      { text: "human handoff rules", x: 12, y: 30 },
+      { text: "10 concurrent calls", x: 64, y: 62 },
+      { text: "summary after every call", x: 12, y: 30 },
+    ],
+  },
+  {
+    id: "automation",
+    icon: "↻",
+    chapter: "04 / automation & scraping",
+    headline: "THE MANUAL STEP, DELETED",
+    body: "AI-driven extraction over APIs, and browser automation for everything that has no API. Proxy and IP rotation, scheduled runs, and a dashboard so you can watch the thing work rather than trust it blindly.",
+    callouts: [
+      { text: "proxy + ip rotation", x: 62, y: 70 },
+      { text: "dashboard over every run", x: 14, y: 24 },
     ],
   },
   {
     id: "cloud",
     icon: "☁",
     chapter: "05 / cloud & server-side",
-    headline: "MOVE THE WORK OFF THEIR MACHINES",
-    body: "Queues, workers, schedulers and storage on infrastructure that scales down to nothing overnight. Heavy jobs run on servers, not on someone's laptop.",
+    headline: "IT RUNS WHETHER YOU WATCH IT OR NOT",
+    body: "Migrations between databases, storage and retrieval on servers I configure and own, authentication, and deployments that stay up. The heavy work happens on the server, not on somebody's laptop.",
     callouts: [
-      { text: "queued background workers", x: 60, y: 28 },
-      { text: "autoscaling + cost caps", x: 10, y: 68 },
+      { text: "database migrations", x: 60, y: 28 },
+      { text: "auth + always-on deploys", x: 10, y: 68 },
     ],
   },
   {
-    id: "automation",
-    icon: "↻",
-    chapter: "06 / automation & scraping",
-    headline: "THE MANUAL STEP, DELETED",
-    body: "Data pulled, cleaned, matched and pushed where it belongs on a schedule. The recurring three-hour Monday task becomes a log line.",
+    id: "booking",
+    icon: "◷",
+    chapter: "06 / booking & scheduling",
+    headline: "SCHEDULING WITHOUT THE PHONE CALLS",
+    body: "Availability, capacity, payments and reminders, built into the products above rather than sold as a separate thing. Shipped inside the voice agent, the marketplace and the finance platform.",
     callouts: [
-      { text: "resilient extractors", x: 62, y: 70 },
-      { text: "scheduled pipelines", x: 14, y: 24 },
+      { text: "conflict-free slotting", x: 66, y: 22 },
+      { text: "payments + reminders", x: 10, y: 66 },
     ],
   },
 ];
@@ -124,8 +139,8 @@ export type Project = {
   outcome: string;
   stack: string[];
   /**
-   * PLACEHOLDER — drop a screenshot at /public/projects/<id>.png and set this
-   * to `/projects/<id>.png`. Until then a generated abstract mock renders.
+   * Drop a screenshot at /public/projects/<id>.png and set this to
+   * `/projects/<id>.png`. Until then the animated illustration renders.
    */
   image?: string;
   hue: number;
@@ -134,111 +149,112 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "finance",
-    name: "Finance & Expense Platform",
-    tag: "erp",
+    name: "Finance & ERP Platform",
+    tag: "erp · production",
     problem:
-      "A growing operation ran its money through spreadsheets. Nobody could say what was owed this week without an afternoon of manual work.",
+      "Invoices, salaries, extra charges, zakat and the split of profit between shareholders lived in separate sheets. Nobody could say what was owed this week without a long afternoon of work.",
     build:
-      "A double-entry ledger with invoicing, recurring billing, approval chains, and role-scoped reporting. Server-side jobs close the books nightly.",
+      "One system that calculates all of it: billing, payroll, deductions, zakat and shareholder distribution, with every figure traceable back to the transaction behind it. Frontend on Vercel, backend and database on the cloud.",
     outcome:
-      "Month-end went from days to a morning, and every figure traces back to the transaction that produced it.",
-    stack: ["Next.js", "PostgreSQL", "Node", "Stripe"],
+      "Month-end became a report instead of a reconciliation, and the shareholder split stopped being an argument.",
+    stack: ["Next.js", "Python", "Cloud DB", "Vercel"],
     hue: 24,
   },
   {
-    id: "journaling",
-    name: "Journaling & Reflection Platform",
-    tag: "product",
+    id: "chatbots",
+    name: "AI Chatbots with Human Escalation",
+    tag: "ai · 5 deployments",
     problem:
-      "Consumer product needed to feel private and instant while still running AI analysis over deeply personal writing.",
+      "Businesses answered the same questions by hand all day, and off-the-shelf bots either knew nothing about them or invented an answer.",
     build:
-      "Encrypted entry storage, streaming AI reflections, mood/topic extraction, and a background pipeline that builds long-term summaries without blocking the UI.",
+      "A chatbot you load your own knowledge base into. It answers in realtime from that material, and when a question falls outside what it knows it hands the conversation to a human with the full context attached rather than guessing.",
     outcome:
-      "Sub-second writing experience with AI insight that arrives asynchronously instead of making users wait.",
-    stack: ["Next.js", "LLM API", "Queues", "Postgres"],
-    hue: 265,
-  },
-  {
-    id: "tenant-rag",
-    name: "Tenant-Support RAG Assistant",
-    tag: "ai / rag",
-    problem:
-      "A property operation drowned in repeat tenant questions already answered inside leases and policy PDFs.",
-    build:
-      "Document ingestion and chunking, vector retrieval with metadata filters per property, cited answers, and an escalation path to a human with full context attached.",
-    outcome:
-      "The bulk of routine enquiries resolve without staff touching them, and every answer points at the clause it came from.",
-    stack: ["RAG", "Vector DB", "Embeddings", "Python"],
-    hue: 172,
-  },
-  {
-    id: "marketplace",
-    name: "Cleaner Marketplace & Invoicing",
-    tag: "marketplace",
-    problem:
-      "Two-sided service business coordinated jobs, cleaners and payments entirely by hand.",
-    build:
-      "Matching and dispatch, job lifecycle states, Stripe Connect payouts, automated invoicing, and a client portal with live job status.",
-    outcome:
-      "Booking to payout runs as one automated flow with no manual invoice ever written.",
-    stack: ["Next.js", "Stripe Connect", "Node", "Postgres"],
+      "Running on five sites. Routine questions resolve without staff, and nobody receives a confidently wrong answer.",
+    stack: ["Python", "LangChain", "Vector DB", "Realtime chat"],
     hue: 200,
   },
   {
-    id: "voice-agent",
-    name: "Inbound Voice Agent",
-    tag: "voice",
+    id: "rag",
+    name: "Document-Grounded RAG Assistants",
+    tag: "rag · 4 deployments",
     problem:
-      "Missed calls outside office hours were quietly the largest source of lost revenue.",
+      "Some questions cannot be answered from a model's memory. Tenancy law and trade documentation change, and being confidently wrong has consequences.",
     build:
-      "A realtime speech agent that answers, qualifies, books into the live calendar, and hands off to staff with a transcript and summary when intent gets complex.",
+      "Retrieval systems that read the source material and answer from it, with tools the assistant can call: contract and tenancy work at Sliding Scale, import and export knowledge at Sawda.ai. Both under NDA, so this is the shape of the work rather than the detail of it.",
     outcome:
-      "Every call answered, with structured lead data landing in the CRM before the caller hangs up.",
-    stack: ["Realtime STT/TTS", "LLM", "Telephony", "Webhooks"],
+      "Four retrieval systems in use. Every answer points back at the document it came from, which is the entire point.",
+    stack: ["Python", "LangGraph", "Embeddings", "Vector search"],
+    hue: 172,
+  },
+  {
+    id: "voice",
+    name: "Inbound Voice Agent",
+    tag: "voice · production",
+    problem:
+      "Calls outside office hours went unanswered, and every missed call was a booking that went somewhere else.",
+    build:
+      "A telephony agent on the cloud that answers, classifies what the caller wants, books it against the live calendar, and sends the responsible staff member a summary by SMS or email as soon as the call ends.",
+    outcome:
+      "Handles ten calls at the same time and saves the team more than forty hours a week.",
+    stack: ["Python", "Telephony API", "Speech", "Cloud"],
     hue: 330,
   },
   {
-    id: "cooking",
-    name: "Recipe & Meal Platform",
-    tag: "content",
+    id: "automation",
+    name: "Behavioural Instagram Automation",
+    tag: "automation · personal project",
     problem:
-      "A content-heavy cooking site needed search that understood intent, not just keywords, without a slow first paint.",
+      "Scripted automation is obvious. It moves at machine speed in machine patterns, and gets shut down quickly.",
     build:
-      "Structured recipe modelling, semantic search over ingredients and technique, image pipeline, and aggressive static generation with incremental revalidation.",
+      "AI decides what to do next instead of following a fixed script, so the timing and order of actions read as a person using the app. Runs on a server with proxy and IP rotation across several accounts, controlled from a dashboard.",
     outcome:
-      "Fast pages, search that answers 'what can I make with what I have', and content editable by non-developers.",
-    stack: ["Next.js", "Semantic Search", "CDN", "CMS"],
-    hue: 40,
+      "Three to four accounts through three proxies on one server, all observable from a single dashboard.",
+    stack: ["Python", "Browser automation", "Proxies", "Dashboard"],
+    hue: 96,
   },
   {
-    id: "automation",
-    name: "Automation & Data Pipelines",
-    tag: "automation",
+    id: "journaling",
+    name: "Cloud Journaling App",
+    tag: "product",
     problem:
-      "Pricing and listing data lived on other people's websites and got copied by hand every week.",
+      "A journal that lives on one device is lost the moment that device is. People also remember in pictures, not only in sentences.",
     build:
-      "Scheduled extractors with retry and drift detection, normalisation into a clean schema, deduplication, and delivery into the client's existing tools.",
+      "Entries and photographs stored on a cloud-backed server, so a journal written on one device opens on any other at any time, with the images attached to the day they belong to.",
     outcome:
-      "A recurring multi-hour manual task became a scheduled job with alerting when a source changes shape.",
-    stack: ["Python", "Playwright", "Cron", "Postgres"],
-    hue: 96,
+      "Writing and photographs stay together and stay available, wherever you open them.",
+    stack: ["Next.js", "Cloud storage", "Auth", "Server"],
+    hue: 265,
+  },
+  {
+    id: "marketplace",
+    name: "Cleaner Marketplace",
+    tag: "marketplace",
+    problem:
+      "Homeowners and cleaners found each other by phone and word of mouth, and payment happened off the books.",
+    build:
+      "A two-sided marketplace matching cleaners to homeowners by location and service area, taking payment through Stripe, with job data processed and stored on servers rather than in a spreadsheet.",
+    outcome:
+      "Booking, matching and payment run as one flow, so nobody has to chase an invoice.",
+    stack: ["Next.js", "Stripe", "Server", "Database"],
+    hue: 40,
   },
 ];
 
 export const about = {
   eyebrow: "[· about ·]",
   script: "the short version",
-  headline: "Data structures first. Systems ever since.",
+  headline: "Still a student. Already shipping production systems.",
   paragraphs: [
-    "I started in data structure engineering - the unglamorous work of making information sit in the right shape so everything built on top of it stays cheap and fast. That grounding never left.",
-    "From there I moved into backend and full-stack AI engineering: APIs, queues, databases, retrieval pipelines, and the model layer sitting on top of all of it. I learned that most 'AI problems' are actually data-plumbing problems wearing a costume.",
-    "Today I work as a full-stack AI engineer on a sliding scale - I can take a business from no system at all, to a working one, to one with AI genuinely bolted into the parts where it pays for itself. Small engagements and long builds both welcome.",
+    "I am studying BS Computer Science at FAST-NUCES in Karachi, class of 2027. I did not wait for the degree before building things that other people depend on.",
+    "I started at Sawda.ai as an intern on model experimentation and data workflows, then stayed as a Junior Software Engineer building AI features across their platform. I am now a Junior Software Engineer at Sliding Scale Technologies, working end to end: designing scalable applications, shipping MVPs, and building the internal tools the company runs on.",
+    "Alongside that I take freelance work on Upwork and build my own systems. The through-line is the same everywhere. Get the data into the right shape, put it somewhere that stays up, and add AI at the points where it actually pays for itself.",
   ],
   facts: [
-    { k: "focus", v: "AI systems, backend, cloud" },
-    { k: "works with", v: "founders & operations teams" },
-    { k: "engagements", v: "build · rescue · extend" },
-    { k: "timezone", v: "PKT · overlaps EU & US-East" },
+    { k: "role", v: "Junior Software Engineer, Sliding Scale Technologies" },
+    { k: "studying", v: "BS Computer Science, FAST-NUCES, class of 2027" },
+    { k: "based in", v: "Karachi, Pakistan" },
+    { k: "freelance", v: "Upwork · 19 jobs · $1K+ earned" },
+    { k: "also", v: "Co-Head, CS Competition, PROCOM'26" },
   ],
 } as const;
 
@@ -246,36 +262,36 @@ export const processCards = [
   {
     id: "map",
     step: "01",
-    title: "Map the actual problem",
-    body: "Before any code: where does the work leak? I trace the real path a job takes through your business today, including the parts that live in someone's head.",
+    title: "Find where the work leaks",
+    body: "Before any code: what a job actually costs you today, including the parts that only live in somebody's head. That is usually where the system is missing.",
   },
   {
     id: "spine",
     step: "02",
     title: "Build the spine first",
-    body: "Data model, auth, and the one workflow that matters most. You get something usable early, not a demo that collapses on real data.",
+    body: "Data model, auth, and the one workflow that matters most. You get something real to use early, not a demo that falls over on your actual data.",
   },
   {
     id: "ai",
     step: "03",
     title: "Add AI where it pays",
-    body: "Retrieval, agents and automation go in at the points with measurable return - not sprinkled across the product because it sounds modern.",
+    body: "Retrieval, agents and automation go in at the points with a measurable return. Everywhere else ordinary code is faster, cheaper and easier to trust.",
   },
   {
     id: "hand",
     step: "04",
-    title: "Hand over something owned",
-    body: "Documented, deployed, and yours. Infrastructure in your accounts, no black boxes, and a clear line for what happens when it needs to change.",
+    title: "Hand over something you own",
+    body: "Deployed, documented, and running on infrastructure in your name. No black boxes, and a clear answer for what happens when it needs to change.",
   },
 ] as const;
 
 export const contact = {
   eyebrow: "[· contact ·]",
   headline: "Tell me what's broken.",
-  sub: "No system, a system fighting you, or a working one that needs AI in it. Two ways in - pick whichever you prefer.",
+  sub: "No system yet, a system that fights you, or one that works and needs AI in it. Two ways in, pick whichever suits you.",
   callHeading: "Book a call",
   callBody:
-    "30 minutes, no pitch deck. Bring the messy version of the problem - that's the useful one.",
+    "30 minutes, no pitch deck. Bring the messy version of the problem, that is the useful one.",
   callPoints: [
     "we map where the work actually leaks",
     "you leave with a build order, not a quote",

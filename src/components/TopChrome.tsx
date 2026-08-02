@@ -71,6 +71,15 @@ export default function TopChrome() {
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em]">
+            <a
+              href={site.upworkUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden items-center gap-1.5 rounded-sm border border-line bg-navy/80 px-2 py-1 text-accent-2 transition-colors hover:border-accent-2/60 sm:flex"
+            >
+              upwork
+              <span className="text-muted/70">19 jobs</span>
+            </a>
             <span className="rounded-sm border border-line bg-navy/80 px-1.5 py-1 tabular-nums text-accent">
               {String(pct).padStart(2, "0")}%
             </span>

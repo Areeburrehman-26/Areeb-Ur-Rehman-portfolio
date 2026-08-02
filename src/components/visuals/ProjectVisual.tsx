@@ -77,7 +77,7 @@ function JournalViz({ hue }: { hue: number }) {
           style={{ background: c(65), animation: "viz-blink 1.8s ease-in-out infinite" }}
         />
         <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-ink/45">
-          mood · themes · streak
+          synced · photo attached
         </span>
       </div>
     </div>
@@ -155,10 +155,10 @@ function MarketplaceViz({ hue }: { hue: number }) {
             />
           </g>
         ))}
-        <text x="24" y="98" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
-          JOBS
+        <text x="16" y="98" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
+          HOMES
         </text>
-        <text x="150" y="98" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
+        <text x="146" y="98" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
           CLEANERS
         </text>
       </svg>
@@ -191,88 +191,141 @@ function VoiceViz({ hue }: { hue: number }) {
           className="h-1.5 w-1.5 rounded-full"
           style={{ background: c(65), animation: "viz-blink 1.2s ease-in-out infinite" }}
         />
-        on call · booking · handoff ready
+        on call · booking · summary sent
       </div>
     </div>
   );
 }
 
-/** 06 — cooking: ingredients resolving into a plated result. */
-function CookingViz({ hue }: { hue: number }) {
+/** 06 — chatbots: answers from an uploaded knowledge base, then a handoff. */
+function ChatViz({ hue }: { hue: number }) {
   const c = tone(hue);
-  const chips = ["eggs", "flour", "chilli", "stock", "lemon"];
   return (
-    <div className="viz absolute inset-x-6 bottom-8 top-20 flex flex-col justify-center gap-4">
-      <div className="flex flex-wrap gap-2">
-        {chips.map((chip, i) => (
-          <span
-            key={chip}
-            className="rounded-full border px-2 py-1 font-mono text-[8px] uppercase tracking-[0.14em]"
-            style={{
-              borderColor: c(50, 0.4),
-              color: c(70),
-              animation: `viz-blink 3s ease-in-out ${i * 0.35}s infinite`,
-            }}
-          >
-            {chip}
-          </span>
-        ))}
+    <div className="viz absolute inset-x-6 bottom-8 top-20 flex flex-col justify-center gap-2.5">
+      {/* visitor asks */}
+      <div className="flex justify-end">
+        <span
+          className="rounded-md rounded-br-sm px-3 py-2"
+          style={{ background: c(30, 0.5), animation: "viz-blink 4s ease-in-out infinite" }}
+        >
+          <span className="block h-1.5 w-16 rounded-full" style={{ background: c(60, 0.5) }} />
+        </span>
       </div>
-      <svg viewBox="0 0 120 40" className="h-12 w-full">
-        <circle cx="60" cy="26" r="14" fill="none" stroke={c(55, 0.7)} strokeWidth="1.5" />
-        <circle cx="60" cy="26" r="7" fill={c(58, 0.35)} />
-        {[0, 1, 2].map((i) => (
-          <path
-            key={i}
-            d={`M${52 + i * 8} 12 q3 -5 0 -9`}
-            fill="none"
-            stroke={c(65, 0.7)}
-            strokeWidth="1.2"
-            style={{ animation: `viz-float ${2.4 + i * 0.3}s ease-in-out ${i * 0.25}s infinite` }}
+
+      {/* bot answers from the knowledge base */}
+      <div className="flex items-end gap-2">
+        <span
+          className="h-5 w-5 shrink-0 rounded-full border"
+          style={{ borderColor: c(58, 0.7), animation: "viz-blink 2.2s ease-in-out infinite" }}
+        />
+        <span
+          className="flex-1 rounded-md rounded-bl-sm px-3 py-2"
+          style={{ background: c(22, 0.6) }}
+        >
+          <span
+            className="block h-1.5 origin-left rounded-full"
+            style={{
+              width: "88%",
+              background: c(62, 0.85),
+              animation: "viz-type 3.4s ease-in-out infinite",
+            }}
           />
-        ))}
-      </svg>
+          <span
+            className="mt-1.5 block h-1.5 origin-left rounded-full"
+            style={{
+              width: "56%",
+              background: c(62, 0.5),
+              animation: "viz-type 3.4s ease-in-out 0.5s infinite",
+            }}
+          />
+        </span>
+      </div>
+
+      {/* out of its depth: escalate */}
+      <div
+        className="mt-1 flex items-center gap-2 rounded-sm border px-2 py-1.5"
+        style={{ borderColor: c(55, 0.4), animation: "viz-float 4.5s ease-in-out infinite" }}
+      >
+        <span
+          className="h-1.5 w-1.5 rounded-full"
+          style={{ background: c(66), animation: "viz-blink 1.6s ease-in-out infinite" }}
+        />
+        <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-ink/45">
+          escalated to human · context attached
+        </span>
+      </div>
     </div>
   );
 }
 
-/** 07 — automation: a packet travelling the pipeline on a schedule. */
+/** 07 — automation: accounts behind rotating proxies, AI picking the next move. */
 function AutomationViz({ hue }: { hue: number }) {
   const c = tone(hue);
-  const nodes = [20, 70, 120, 170];
+  const accounts = [22, 50, 78];
   return (
     <div className="viz absolute inset-x-6 bottom-8 top-20 flex items-center">
-      <svg viewBox="0 0 190 90" className="h-full w-full">
-        <path
-          d="M20 60 H70 V30 H120 V60 H170"
-          fill="none"
-          stroke={c(40, 0.45)}
-          strokeWidth="1.5"
-        />
-        <path
-          d="M20 60 H70 V30 H120 V60 H170"
+      <svg viewBox="0 0 190 100" className="h-full w-full">
+        {/* the model deciding */}
+        <circle cx="26" cy="50" r="13" fill="none" stroke={c(60)} strokeWidth="1.4" />
+        <circle
+          cx="26"
+          cy="50"
+          r="13"
           fill="none"
           stroke={c(66)}
-          strokeWidth="2"
-          strokeDasharray="18 222"
-          style={{ animation: "viz-packet 2.8s linear infinite" }}
+          strokeWidth="1"
+          style={{ transformOrigin: "26px 50px", animation: "viz-ring 3s ease-out infinite" }}
         />
-        {nodes.map((x, i) => (
-          <rect
-            key={x}
-            x={x - 6}
-            y={(i === 1 || i === 2 ? 30 : 60) - 6}
-            width="12"
-            height="12"
-            rx="2"
-            fill={c(20)}
-            stroke={c(58)}
-            strokeWidth="1.2"
-            style={{ animation: `viz-blink 2.8s ease-in-out ${i * 0.7}s infinite` }}
-          />
+        <text x="16" y="53" fill={c(70)} fontSize="8" fontFamily="monospace">
+          ai
+        </text>
+
+        {/* proxy rotation */}
+        {accounts.map((y, i) => (
+          <g key={y}>
+            <path
+              d={`M40 50 C70 50, 80 ${y}, 104 ${y}`}
+              fill="none"
+              stroke={c(40, 0.4)}
+              strokeWidth="1.2"
+            />
+            <path
+              d={`M40 50 C70 50, 80 ${y}, 104 ${y}`}
+              fill="none"
+              stroke={c(66)}
+              strokeWidth="1.6"
+              strokeDasharray="12 220"
+              style={{ animation: `viz-packet ${2.6 + i * 0.5}s linear ${i * 0.6}s infinite` }}
+            />
+            <rect
+              x="104"
+              y={y - 6}
+              width="14"
+              height="12"
+              rx="2"
+              fill={c(18)}
+              stroke={c(55, 0.8)}
+              strokeWidth="1"
+            />
+            <text x="106" y={y + 3} fill={c(68, 0.8)} fontSize="6" fontFamily="monospace">
+              px
+            </text>
+            <circle
+              cx="150"
+              cy={y}
+              r="7"
+              fill="none"
+              stroke={c(58, 0.9)}
+              strokeWidth="1.2"
+              style={{ animation: `viz-blink ${3 + i * 0.4}s ease-in-out ${i * 0.5}s infinite` }}
+            />
+          </g>
         ))}
-        <text x="20" y="86" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
-          SCRAPE → CLEAN → MATCH → PUSH
+        <text x="132" y="96" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
+          ACCOUNTS
+        </text>
+        <text x="100" y="14" fill={c(60, 0.5)} fontSize="7" fontFamily="monospace">
+          PROXIES
         </text>
       </svg>
     </div>
@@ -281,12 +334,12 @@ function AutomationViz({ hue }: { hue: number }) {
 
 const MAP: Record<string, (p: { hue: number }) => React.JSX.Element> = {
   finance: FinanceViz,
-  journaling: JournalViz,
-  "tenant-rag": RagViz,
-  marketplace: MarketplaceViz,
-  "voice-agent": VoiceViz,
-  cooking: CookingViz,
+  chatbots: ChatViz,
+  rag: RagViz,
+  voice: VoiceViz,
   automation: AutomationViz,
+  journaling: JournalViz,
+  marketplace: MarketplaceViz,
 };
 
 export default function ProjectVisual({ id, hue }: Props) {

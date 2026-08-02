@@ -49,15 +49,10 @@ export default function Hero() {
 
           <RevealItem className="w-full">
             <dl className="mx-auto mt-12 hidden max-w-3xl grid-cols-2 sm:mt-16 sm:grid gap-x-8 gap-y-5 border-t border-line pt-8 font-mono text-[11px] sm:grid-cols-4">
-              {[
-                ["stack", "next · node · python"],
-                ["ai", "rag · agents · voice"],
-                ["infra", "queues · workers · cloud"],
-                ["status", "open for work"],
-              ].map(([k, v]) => (
-                <div key={k}>
-                  <dt className="uppercase tracking-[0.2em] text-muted/60">{k}</dt>
-                  <dd className="mt-1.5 text-ink">{v}</dd>
+              {hero.facts.map((f) => (
+                <div key={f.k}>
+                  <dt className="uppercase tracking-[0.2em] text-muted/60">{f.k}</dt>
+                  <dd className="mt-1.5 text-ink">{f.v}</dd>
                 </div>
               ))}
             </dl>
