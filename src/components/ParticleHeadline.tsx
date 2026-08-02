@@ -89,7 +89,11 @@ export default function ParticleHeadline({
       dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       // Size the type to the box, then let the line count set the height.
-      const fontSize = Math.max(34, Math.min(112, width * 0.088));
+      // Longer strings step down so a full sentence still lands in three or
+      // four lines instead of towering over the rest of the hero.
+      const ideal = width * 0.088;
+      const lengthFactor = Math.sqrt(46 / Math.max(46, text.length));
+      const fontSize = Math.max(24, Math.min(112, ideal * lengthFactor));
       const lines = layout(fontSize, width * 0.94);
       const lineHeight = fontSize * 1.02;
       height = Math.ceil(lines.length * lineHeight + fontSize * 0.35);

@@ -47,17 +47,6 @@ export default function Hero() {
             </div>
           </RevealItem>
 
-          {/* The human counterpoint to the machine chrome. Serif italic, the
-              same accent the other hand-written notes use. */}
-          <RevealItem className="w-full">
-            <figure className="mx-auto mt-7 max-w-[44ch] sm:mt-12">
-              <blockquote className="font-serif text-base italic leading-relaxed text-muted sm:text-lg">
-                {hero.manifesto.lead}{" "}
-                <span className="text-accent-2">{hero.manifesto.turn}</span>
-              </blockquote>
-            </figure>
-          </RevealItem>
-
           <RevealItem className="w-full">
             <dl className="mx-auto mt-10 hidden max-w-3xl grid-cols-2 sm:mt-14 sm:grid gap-x-8 gap-y-5 border-t border-line pt-8 font-mono text-[11px] sm:grid-cols-4">
               {hero.facts.map((f) => (

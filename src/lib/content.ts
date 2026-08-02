@@ -39,17 +39,13 @@ export const nav = [
 
 export const hero = {
   eyebrow: "[· full-stack web developer · ai engineer · backend systems ·]",
-  headline: "I build the system, then the AI that runs it.",
+  headline:
+    "AI is just a snapshot of our past being sold as the future. The real future is human creativity.",
   sub: "Finance and ERP platforms, assistants grounded in your own documents, voice agents that answer the phone, and the automation behind them.",
   ctas: [
     { label: "see the work", href: "#work", primary: true },
     { label: "book a call", href: "#contact", primary: false },
   ],
-  /** Split so the second half can carry the emphasis. */
-  manifesto: {
-    lead: "AI is just a snapshot of our past being sold as the future.",
-    turn: "The real future is human creativity.",
-  },
   facts: [
     { k: "stack", v: "python · next.js · react" },
     { k: "ai", v: "rag · agents · langchain" },
