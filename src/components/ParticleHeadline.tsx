@@ -193,7 +193,7 @@ export default function ParticleHeadline({
 
       // Sample the rendered glyphs on a grid; every inked cell becomes a dot,
       // coloured by the word it belongs to.
-      const step = width < 640 ? 5 : 4;
+      const step = width < 640 ? 4 : 3.4;
       const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       const next: Particle[] = [];
       for (let y = 0; y < height; y += step) {
@@ -222,7 +222,7 @@ export default function ParticleHeadline({
             y,
             vx: 0,
             vy: 0,
-            size: step - 0.7,
+            size: step + 0.6,
             color,
           });
         }
