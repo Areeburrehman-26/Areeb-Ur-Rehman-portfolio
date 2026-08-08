@@ -16,6 +16,9 @@ export const site = {
   resumeUrl: "/areeb-ur-rehman-resume.pdf",
   upworkUrl:
     "https://www.upwork.com/freelancers/~015f46f60dc0dca7e8?mp_source=share",
+  fiverrUrl: "https://www.fiverr.com/s/2KNzj7r",
+  /** Canonical origin for metadata (sitemap, robots, JSON-LD, OG). Update if a custom domain is added. */
+  url: "https://areeb-ur-rehman-portfolio.vercel.app",
   socials: [
     { label: "github", href: "https://github.com/Areeburrehman-26" },
     {
